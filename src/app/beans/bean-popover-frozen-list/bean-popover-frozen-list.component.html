@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"NAV_FROZEN_BEANS_LIST" | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()" class="big-icon-only">
+        <ion-icon name="beanconqueror-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content #beanContent>
+
+  <!--- We changed back to 100vh because of rendering issues somehow...-->
+  <ag-virtual-scroll #openScroll [items]="frozenBeansList" [height]="'100vh'" min-row-height="180">
+    @for (bean of openScroll.items; track bean) {
+      <bean-information [disabled]='true' [showActions]='false'
+      [bean]="bean"></bean-information>
+    }
+
+  </ag-virtual-scroll>
+
+</ion-content>

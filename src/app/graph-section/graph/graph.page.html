@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar with-add-button>
+    <ion-buttons slot="start">
+      <ion-menu-button show="back"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="add()"  class="big-add-icon" fill="clear">
+        <ion-icon class="ion-color-accent" name="beanconqueror-add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{"GRAPH_SECTION.NAV_GRAPH" | translate }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #graphContent>
+  <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" class="ion-padding-vertical" style="padding-top:0px;">
+    <ion-segment-button value="open">
+      <ion-label>{{"CURRENT" | translate}}
+      </ion-label>
+    </ion-segment-button>
+    @if (settings?.show_archived_graphs) {
+      <ion-segment-button value="archiv">
+        <ion-label>{{"TAB_ARCHIVE" | translate}}
+        </ion-label>
+      </ion-segment-button>
+    }
+  </ion-segment>
+  @switch (segment) {
+    @case ('open') {
+      @if (openGraphs.length == 0) {
+        <div class="ion-padding ion-text-center">
+          <div>
+            <ion-icon color="inactive" name="analytics-outline" size="large"></ion-icon>
+          </div>
+          <div class="text-color-inactive ion-margin-top">
+            {{"GRAPH_SECTION.NO_ENTRIES" | translate}}
+          </div>
+        </div>
+      }
+      <ag-virtual-scroll #openScroll [items]="openGraphs" [height]="'100vh'" min-row-height="165">
+        @for (graph of openScroll.items; track graph) {
+          <graph-information-card (graphAction)="triggerAction($event[0],$event[1])" [graph]="graph"></graph-information-card>
+        }
+      </ag-virtual-scroll>
+    }
+    @case ('archiv') {
+      @if (settings?.show_archived_beans) {
+        @if (finishedGraphs.length == 0) {
+          <div class="ion-padding ion-text-center">
+            <div>
+              <ion-icon color="inactive" name="analytics-outline" size="large"></ion-icon>
+            </div>
+            <div class="text-color-inactive ion-margin-top">
+              {{"GRAPH_SECTION.NO_ARCHIVED_ENTRIES" | translate}}
+            </div>
+          </div>
+        }
+        <ag-virtual-scroll #archivedScroll [items]="finishedGraphs" [height]="'100vh'" min-row-height="165">
+          @for (graph of archivedScroll.items; track graph) {
+            <graph-information-card (graphAction)="triggerAction($event[0],$event[1])" [graph]="graph"></graph-information-card>
+          }
+        </ag-virtual-scroll>
+      }
+    }
+  }
+</ion-content>

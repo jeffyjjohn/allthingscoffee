@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        icon="beanconqueror-back">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{"NAV_LICENCES" | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  @for (key of licences | keys; track key) {
+    <ion-card>
+      <ion-item (click)="openLink($event,licences[key].LINK)" button tappable>
+        <ion-title>{{ licences[key].TITLE }}</ion-title>
+        <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+      <ion-item (click)="licences[key].ACTIVE = !licences[key].ACTIVE" button lines="none" tappable>
+        @if (licences[key].ACTIVE != true) {
+          <ion-icon name="chevron-down-outline" slot="start"></ion-icon>
+        }
+        @if (licences[key].ACTIVE === true) {
+          <ion-icon name="chevron-up-outline" slot="start"></ion-icon>
+        }
+        <ion-label>{{"MORE_INFORMATION" | translate}}</ion-label>
+      </ion-item>
+      @if (licences[key].ACTIVE === true) {
+        <ion-card-content [innerHTML]="licences[key].DESCRIPTION"
+          class="white-space-normal"
+          style="border-top: 1px solid rgba(0, 0, 0, 0.3);padding-top: 10px;">
+        </ion-card-content>
+      }
+    </ion-card>
+  }
+</ion-content>
+

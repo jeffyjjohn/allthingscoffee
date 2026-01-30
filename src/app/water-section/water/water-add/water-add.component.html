@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"ADD_WATER" | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()" class="big-icon-only">
+        <ion-icon name="beanconqueror-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      @for (key of water_type_enums | keys; track key) {
+        <ion-col size="6">
+          <ion-card (click)="chooseWater(key)" class="water-add-card" tappable>
+            @if (key !== 'CUSTOM_WATER') {
+              <ion-card-content>
+                <div class="ion-text-center">
+                  @if (key.startsWith('EMPIRICAL') === false) {
+                    <ion-icon name="{{data.getIcon(key)}}" slot="icon-only"></ion-icon>
+                  }
+                  @if (key.startsWith('EMPIRICAL') === true) {
+                    <img src='assets/img/{{key.toLowerCase()}}.png' class='empirical-water' />
+                  }
+                </div>
+                <div class="ion-text-center">
+                  {{'WATER_TYPE_' + key | translate}}
+                </div>
+              </ion-card-content>
+            }
+            @if (key === 'CUSTOM_WATER') {
+              <ion-card-content>
+                <div class="ion-text-center">
+                  <ion-icon name="water-outline" slot="icon-only" style='width:64px!important;'></ion-icon>
+                </div>
+                <div class="ion-text-center" style="line-height:initial;">
+                  {{'WATER_TYPE_ADD_CUSTOM' | translate}}
+                </div>
+              </ion-card-content>
+            }
+          </ion-card>
+        </ion-col>
+      }
+    </ion-row>
+  </ion-grid>
+</ion-content>

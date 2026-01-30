@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{"NAV_BREW_PARAMS" | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card (click)="openManageParameters()" tappable>
+    <ion-item class="ion-padding-horizontal" lines="none">
+      <ion-icon name="beanconqueror-manage-parameter" slot="start"></ion-icon>
+      {{"NAV_MANAGE_PARAMETERS" | translate}}
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="openSortParameters()" tappable>
+    <ion-item class="ion-padding-horizontal" lines="none">
+      <ion-icon name="beanconqueror-sort-parameter" slot="start"></ion-icon>
+      {{"NAV_SORT_PARAMETERS" | translate}}
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="openDefaultParameters()" tappable>
+    <ion-item class="ion-padding-horizontal" lines="none">
+      <ion-icon name="beanconqueror-default-parameter" slot="start"></ion-icon>
+      {{"NAV_DEFAULT_PARAMETERS" | translate}}
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="openRepeatParameters()" tappable>
+    <ion-item class="ion-padding-horizontal" lines="none">
+      <ion-icon name="beanconqueror-repeat-round" slot="start"></ion-icon>
+      {{"NAV_REPEAT_PARAMETERS" | translate}}
+    </ion-item>
+  </ion-card>
+
+  <ion-card (click)="openListViewParameters()" tappable>
+    <ion-item class="ion-padding-horizontal" lines="none">
+      <ion-icon name="beanconqueror-list-view-parameter" slot="start"></ion-icon>
+      {{"NAV_LIST_VIEW_CUSTOM_PARAMETERS" | translate}}
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="ion-padding">
+    <ion-card-title>{{"BREW_PARAMETER_CUSTOMIZE_TITLE" | translate}}</ion-card-title>
+    <ion-card-content class="ion-no-padding">
+      {{"BREW_PARAMETER_CUSTOMIZE_DESCRIPTION" | translate}}
+    </ion-card-content>
+    <ion-item [routerLink]="['/home/preparations']" detail="true" lines="none"
+              replaceUrl="true" >
+      {{"NAVIGATE_TO_PREPARATION_METHODS" | translate}}
+    </ion-item>
+  </ion-card>
+</ion-content>

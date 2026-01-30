@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"NAV_BREWS" | translate}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()" class="big-icon-only">
+        <ion-icon name="beanconqueror-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content #associatedBrewsComponent>
+    @if(associatedBrews?.length > 0) {
+      <!--We stay at 100vh, because else ALL brew instances are rendered with 100vh just the needed once are rendered - very strange -->
+      <ag-virtual-scroll #openScrollAssociatedBrews [items]="associatedBrews"  [height]="'100vh'" min-row-height="180">
+        @for(brew of openScrollAssociatedBrews.items; track brew.config.uuid) {
+          <brew-information [collapsed]="isCollapsed" (brewAction)="brewAction()"
+                            [brew]="brew"></brew-information>
+        }
+      </ag-virtual-scroll>
+    } @else {
+      <div class="ion-padding ion-text-center">
+        <div>
+          <ion-icon color="inactive" name="beanconqueror-cup" size="large"></ion-icon>
+        </div>
+        <div class="text-color-inactive ion-margin-top">
+          {{"PAGE_BREWS_NO_ENTRIES" | translate}}
+        </div>
+      </div>
+    }
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-content>
+  <ion-tabs>
+
+    <ion-tab-bar slot="bottom" style="box-shadow: 0px -2px 10px #00000021;padding-top: 12px;">
+      <ion-tab-button tab="dashboard" tappable>
+        <ion-icon class="menu-icon" name="beanconqueror-home"></ion-icon>
+        <ion-label>{{"NAV_HOME" | translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="brews" tappable>
+        <ion-icon class="menu-icon" name="beanconqueror-brew"></ion-icon>
+        <ion-label>{{"NAV_BREWS" | translate}}</ion-label>
+      </ion-tab-button>
+      <ion-tab-button tab="beans" tappable>
+        <ion-icon class="menu-icon" name="beanconqueror-bean"></ion-icon>
+        <ion-label>{{"NAV_BEANS" | translate}}</ion-label>
+        @if (!beansExist) {
+<ion-badge color="danger"></ion-badge>
+}
+      </ion-tab-button>
+
+      <ion-tab-button tab="preparations" tappable>
+        <ion-icon class="menu-icon" name="beanconqueror-preparation"></ion-icon>
+        <ion-label>{{"NAV_PREPARATION" | translate}}</ion-label>
+        @if (!preparationsExist) {
+<ion-badge color="danger"></ion-badge>
+}
+      </ion-tab-button>
+
+      <ion-tab-button tab="mills" tappable>
+        <ion-icon class="menu-icon stroke" name="beanconqueror-pepper-mill"></ion-icon>
+        <ion-label>{{"NAV_MILL" | translate}}</ion-label>
+        @if (!millsExist) {
+<ion-badge color="danger"></ion-badge>
+}
+      </ion-tab-button>
+
+
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-content>

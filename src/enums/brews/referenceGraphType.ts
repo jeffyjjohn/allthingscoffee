@@ -1,0 +1,6 @@
+export enum REFERENCE_GRAPH_TYPE {
+  NONE = 'NONE',
+  BREW = 'BREW',
+  GRAPH = 'GRAPH',
+  IMPORTED_GRAPH = 'IMPORTED_GRAPH',
+}

@@ -1,0 +1,273 @@
+<ion-header>
+  <ion-toolbar>
+    @if (multiple) {
+      <ion-title>{{ "CHOOSE_BEANS" | translate }}</ion-title>
+    } @else {
+      <ion-title>{{ "CHOOSE_BEAN" | translate }}</ion-title>
+    }
+    <ion-buttons slot='start'>
+      <ion-button (click)='dismiss()' class='big-icon-only'>
+        <ion-icon name='beanconqueror-back' slot='icon-only'></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot='end'>
+      <ion-button (click)="add()" tappable class="big-add-icon" fill="clear">
+        <ion-icon class="ion-color-accent" name="beanconqueror-add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content #beanContent>
+
+  <ion-segment (ionChange)="segmentChanged()" [(ngModel)]='bean_segment'>
+    <ion-segment-button value='open'>
+      <ion-label>{{ "CURRENT" | translate }}
+      </ion-label>
+    </ion-segment-button>
+    @if (settings.freeze_coffee_beans && frozenBeansLength) {
+      <ion-segment-button value='frozen'>
+        <ion-label>{{ "FROZEN_BEANS" | translate }}
+        </ion-label>
+      </ion-segment-button>
+    }
+    @if (showFinished===true && finishedBeansLength > 0) {
+      <ion-segment-button value='archive'>
+        <ion-label>{{ "TAB_ARCHIVE" | translate }}
+        </ion-label>
+      </ion-segment-button>
+    }
+  </ion-segment>
+
+
+    @switch (bean_segment) {
+      @case ('open') {
+        <ion-radio-group [(ngModel)]='radioSelection'>
+        <ion-card>
+          <ng-container [ngTemplateOutlet]="beanSearchToolbar"></ng-container>
+          @if (openBeans.length > 0) {
+            <ag-virtual-scroll #openScroll [items]='openBeans' [height]="'100vh'" min-row-height='60'>
+              @for (bean of openScroll.items; track bean.config.uuid) {
+                <ion-item lines='none' tappable>
+                  @if (multiple) {
+                    <ion-checkbox justify='start' label-placement='end'
+                                  [(ngModel)]='multipleSelection[bean.config.uuid]'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-checkbox>
+                  } @else {
+                    <ion-radio justify='start' label-placement='end' value='{{bean.config.uuid}}'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-radio>
+                  }
+                  <ng-container [ngTemplateOutlet]="beanThumbnailCard"
+                                [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                </ion-item>
+              }
+            </ag-virtual-scroll>
+
+          } @else {
+            <div class='ion-padding ion-text-center'>
+              <div>
+                <ion-icon color='inactive' name='beanconqueror-beans' size='large'></ion-icon>
+              </div>
+              <div class='text-color-inactive ion-margin-top'>
+                {{ "PAGE_BEANS_LIST_YOU_GOT_NO_FRESH_BEANS" | translate }}
+              </div>
+            </div>
+          }
+        </ion-card>
+        </ion-radio-group>
+      }
+      @case ('frozen') {
+        <ion-radio-group [(ngModel)]='radioSelection'>
+        <ion-card>
+          <ng-container [ngTemplateOutlet]="beanSearchToolbar"></ng-container>
+          @if (frozenBeans.length > 0) {
+            <ag-virtual-scroll #frozenScroll [items]='frozenBeans' [height]="'100vh'" min-row-height='60'>
+              @for (bean of frozenScroll.items; track bean.config.uuid) {
+                <ion-item lines='none' tappable>
+                  @if (multiple) {
+                    <ion-checkbox justify='start' label-placement='end'
+                                  [(ngModel)]='multipleSelection[bean.config.uuid]'
+                                  slot='start'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-checkbox>
+                  } @else {
+                    <ion-radio justify='start' label-placement='end' value='{{bean.config.uuid}}'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-radio>
+                  }
+                  <ng-container [ngTemplateOutlet]="beanThumbnailCard"
+                                [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                </ion-item>
+              }
+            </ag-virtual-scroll>
+          } @else {
+            <div class='ion-padding ion-text-center'>
+              <div>
+                <ion-icon color='inactive' name='beanconqueror-beans' size='large'></ion-icon>
+              </div>
+              <div class='text-color-inactive ion-margin-top'>
+                {{ "PAGE_BEANS_LIST_YOU_GOT_NO_FROZEN_BEANS" | translate }}
+              </div>
+            </div>
+          }
+        </ion-card>
+        </ion-radio-group>
+      }
+      @case ('archive') {
+        <ion-radio-group [(ngModel)]='radioSelection'>
+        <ion-card>
+          <ng-container [ngTemplateOutlet]="beanSearchToolbar"></ng-container>
+          @if (finishedBeans.length > 0) {
+            <ag-virtual-scroll #archivedScroll [items]='finishedBeans' [height]="'100vh'" min-row-height='60'>
+              @for (bean of archivedScroll.items; track bean.config.uuid) {
+                <ion-item lines='none' tappable>
+                  @if (multiple) {
+
+                    <ion-checkbox justify='start' label-placement='end'
+                                  [(ngModel)]='multipleSelection[bean.config.uuid]'
+                                  slot='start'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-checkbox>
+                  } @else {
+                    <ion-radio justify='start' label-placement='end' value='{{bean.config.uuid}}'>
+                      <ng-container [ngTemplateOutlet]="beanInformationCard"
+                                    [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                    </ion-radio>
+                  }
+                  <ng-container [ngTemplateOutlet]="beanThumbnailCard"
+                                [ngTemplateOutletContext]="{bean:bean}"></ng-container>
+                </ion-item>
+              }
+            </ag-virtual-scroll>
+          } @else {
+            <div class='ion-padding ion-text-center'>
+              <div>
+                <ion-icon color='inactive' name='beanconqueror-beans' size='large'></ion-icon>
+              </div>
+              <div class='text-color-inactive ion-margin-top'>
+                {{ "PAGE_BEANS_LIST_YOU_GOT_NO_FINISHED_BEANS" | translate }}
+              </div>
+            </div>
+          }
+        </ion-card>
+        </ion-radio-group>
+      }
+    }
+
+</ion-content>
+<ion-footer #footerContent class='ion-no-border'>
+  <ion-row>
+    <ion-col size='6'>
+      <ion-button (click)='dismiss()' color='accent' expand='block' fill='outline'
+                  tappable>{{ "CANCEL" | translate }}
+      </ion-button>
+    </ion-col>
+    <ion-col size='6'>
+      <ion-button (click)='choose()' color='accent' expand='block' tappable
+                  type='submit'>{{ "CHOOSE" | translate }}
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+</ion-footer>
+<ng-template #beanInformationCard let-bean='bean'>
+  <h6 class="no-overflow-ellipsis">
+    @if (bean.frozenId) {
+      @if (bean?.frozenDate && bean?.unfrozenDate) {
+        (
+      }
+      <ion-icon style="top: 3px;position: relative;"
+                name="snow-outline"></ion-icon>@if (bean?.frozenDate && bean?.unfrozenDate) {
+        )
+      }&nbsp;
+    }{{ bean.name }}
+  </h6>
+  @if (bean?.frozenId) {
+    <p>{{ "BEAN_DATA_FROZEN_ID" | translate }}: {{ bean.frozenId }}</p>
+  }
+  @if (bean?.frozenDate) {
+    <p>{{ "BEAN_DATA_FROZEN_DATE" | translate }}
+      : {{ bean.frozenDate  | formatDate:[settings?.date_format] }}</p>
+  }
+  @if (bean?.unfrozenDate) {
+    <p>{{ "BEAN_DATA_UNFROZEN_DATE" | translate }}
+      : {{ bean.unfrozenDate  | formatDate:[settings?.date_format] }}</p>
+  }
+  @if (bean?.frozenStorageType && bean?.frozenStorageType !== beanFreezingStorageTypeEnum.UNKNOWN) {
+    <p>{{ "BEAN_DATA_FROZEN_STORAGE_TYPE" | translate }}
+      : {{ "BEAN_FREEZING_STORAGE_TYPE_" + bean.frozenStorageType | translate }}</p>
+  }
+  @if (bean?.frozenNote) {
+    <div>{{ "BEAN_DATA_FROZEN_NOTE" | translate }}:
+      <pre style='margin-top:3px!important'>{{ bean?.frozenNote }}</pre>
+    </div>
+  }
+  @if (bean?.roastingDate) {
+    <p>{{ "BEAN_DATA_ROASTING_DATE" | translate }}
+      : {{ bean.roastingDate | formatDate:[settings?.date_format] }}&nbsp;
+      ({{ bean | beanFunctionPipe: BEAN_FUNCTION_PIPE_ENUM.BEAN_AGE_IN_DAYS }}
+      @if ((bean | beanFunctionPipe: BEAN_FUNCTION_PIPE_ENUM.BEAN_AGE_IN_DAYS) === 1) {
+        <span>{{ "DAY" | translate }}</span>
+      } @else {
+        <span>{{ "DAYS" | translate }}</span>
+      })
+    </p>
+  }
+  @if (bean?.roaster) {
+    <p>{{ "BEAN_DATA_ROASTER" | translate }}: {{ bean.roaster }}</p>
+  }
+  @if (bean && !isBeanRoastUnknown(bean)) {
+    <p>{{ "BEAN_DATA_ROASTING_TYPE" | translate }}
+      : {{ "BEAN_ROASTING_TYPE_" + bean.bean_roasting_type | translate }}</p>
+  }
+  @if (bean?.weight > 0) {
+    <p>
+      {{ "BEANS_AMOUNT_USED" | translate }}:&nbsp;<span
+      [innerHTML]="'BEAN_WEIGHT_ALREADY_USED' | translate: {gramUsed: getUsedWeightCount(bean) | number : '.0-2', gramTotal: bean?.weight, leftOver: bean?.weight - getUsedWeightCount(bean)| number : '.0-2'}"
+      style='margin: 0;padding: 0;display: inline;'></span>
+    </p>
+  }
+</ng-template>
+
+<ng-template #beanThumbnailCard let-bean='bean'>
+  @if ((bean | beanFunctionPipe: BEAN_FUNCTION_PIPE_ENUM.HAS_PHOTOS)) {
+    <ion-thumbnail slot="end">
+      <div style="margin: 0 auto;height: 100%;display: flex;align-items: center;" tappable>
+        <async-image [filePath]="bean.attachments[0]" class="bean-slider"></async-image>
+      </div>
+    </ion-thumbnail>
+  }
+</ng-template>
+
+<ng-template #beanSearchToolbar>
+  <div class='ion-justify-content-end container'>
+    <ion-searchbar (ionChange)='research()' (ionInput)='research()' [(ngModel)]='uiSearchText'
+                   class='ion-no-padding ion-no-margin' debounce='750' placeholder="{{'SEARCH' | translate}}"
+                   search-icon='beanconqueror-detail' showCancelButton='never'></ion-searchbar>
+    <ion-button (click)="showFilter()" fill='clear' size='small' tappable>
+      @if (uiIsFilterActive) {
+        <ion-icon name='beanconqueror-filter-active'
+                  slot='icon-only'></ion-icon>
+      } @else {
+        <ion-icon name='beanconqueror-filter-inactive'
+                  slot='icon-only'></ion-icon>
+      }
+    </ion-button>
+    <ion-button class="margin-right-5" (click)="showSort()" fill="clear" size="small" tappable>
+      @if (uiIsSortActive) {
+        <ion-icon name="beanconqueror-sort-active"
+                  slot="icon-only"></ion-icon>
+      } @else {
+        <ion-icon name="beanconqueror-sort-inactive"
+                  slot="icon-only"></ion-icon>
+      }
+    </ion-button>
+  </div>
+  <hr/>
+</ng-template>

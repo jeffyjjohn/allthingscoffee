@@ -1,0 +1,1 @@
+-> https://beanconqueror.com/privacy-policy/

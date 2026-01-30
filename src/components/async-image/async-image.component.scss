@@ -1,0 +1,21 @@
+:host {
+  .brew-image img {
+    max-width: 50%;
+    max-height: 200px;
+  }
+
+  .preload-img {
+    width: 64px;
+    margin: 0 auto;
+  }
+
+  .bean-slider img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  img {
+    border-radius: 8px;
+  }
+}
+

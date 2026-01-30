@@ -1,0 +1,25 @@
+:host {
+  width: 100%;
+  .brew-image img {
+    max-width: 50%;
+    max-height: 200px;
+  }
+
+  ion-item {
+    --background: var(--ion-color-light);
+    --padding-bottom: 0px;
+    --padding-end: 0px;
+    --padding-start: 0px;
+    --padding-top: 0px;
+
+  }
+
+  ion-button {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+
+
+}
+
