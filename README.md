@@ -70,22 +70,6 @@ Different features are supported by this app, a brief overview you'll find here.
 - Cup your brews by aromatics or flavors
 - Connect smart scales (Decent Scale, Acaia Lunar, Hiroia Jimmy, Felicita)
 
-## Special thanks
-
-- Nicola for giving the app a whole new design.
-- Frank for translating the app into spanish.
-- [Joan](https://github.com/Jglez3) - for Spanish translation
-- [Halil Portakal](https://www.kahvekulubu.net/sosyal/members/portakalhalil.3158/) for Turkish translation
-- [Jiageng Ding](https://github.com/JiagengDing) for Chinese translation
-- [Mimoja](https://github.com/Mimoja/) For supporting on Decent Scale integration & Eureka Scale support & Making Combustion.inc Bytes
-- [Silas](https://github.com/silasg) - For supporting Hiroia Jimmy Scale
-- [Mehalter](https://github.com/mehalter) - For supporting Acaia Scales
-- [Mike](https://github.com/mike1808) - For supporting Acaia Scales & DIY Pressure Sensor
-- [Myles](https://github.com/mylesagray) - For supporting Thermo Bluetooth Devices
-- [Herman](https://github.com/hermanmak) - For supporting Felicita Arc
-- [Yannick](https://github.com/randomcoffeesnob) - For supporting DiFluid Microbalance & Smart Chef Scale, BlackCoffee.IO. Also for adding Lokalise
-- [Marius](https://github.com/RagingCactus) - For porting Cordova to Capacitor & Implementing Export & Import routine back to Android
-
 ## Getting the App
 
 The App is a cross platform application, running on the ionic framework.
