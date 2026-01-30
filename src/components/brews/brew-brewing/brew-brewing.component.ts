@@ -1687,5 +1687,114 @@ export class BrewBrewingComponent implements OnInit, AfterViewInit {
     const data = await popover.onWillDismiss();
   }
 
+  /**
+   * Handle change when switching between Single Origin and Blend
+   */
+  public onBeanOriginTypeChanged(): void {
+    if (this.data.is_blend) {
+      // If switching to Blend, clear the single bean selection
+      this.data.bean = '';
+      // Initialize blend_beans array if empty
+      if (!this.data.blend_beans || this.data.blend_beans.length === 0) {
+        this.addBlendBean();
+      }
+    } else {
+      // If switching to Single Origin, clear blend beans
+      this.data.blend_beans = [];
+    }
+  }
+
+  /**
+   * Add a new blend bean entry
+   */
+  public addBlendBean(): void {
+    if (!this.data.blend_beans) {
+      this.data.blend_beans = [];
+    }
+    const newBlendBean = {
+      bean_id: '',
+      grams: 0,
+      percentage: 0,
+    };
+    this.data.blend_beans.push(newBlendBean);
+  }
+
+  /**
+   * Remove a blend bean entry at specific index
+   */
+  public removeBlendBean(index: number): void {
+    if (this.data.blend_beans && index >= 0 && index < this.data.blend_beans.length) {
+      this.data.blend_beans.splice(index, 1);
+      // Recalculate percentages and grams
+      this.recalculateBlendProportions();
+    }
+  }
+
+  /**
+   * Called when a blend bean value changes
+   */
+  public onBlendBeanChanged(index: number): void {
+    // Validate and update blend proportions
+    this.recalculateBlendProportions();
+  }
+
+  /**
+   * Recalculate and validate blend proportions
+   */
+  private recalculateBlendProportions(): void {
+    if (!this.data.blend_beans || this.data.blend_beans.length === 0) {
+      return;
+    }
+
+    // Calculate total grams
+    const totalGrams = this.data.blend_beans.reduce((sum, bean) => sum + (bean.grams || 0), 0);
+
+    // If we have total grams, auto-adjust percentages
+    if (totalGrams > 0) {
+      this.data.blend_beans.forEach((bean) => {
+        bean.percentage = totalGrams > 0 ? Math.round((bean.grams / totalGrams) * 100 * 100) / 100 : 0;
+      });
+    }
+  }
+
+  /**
+   * Get validation message for blend
+   */
+  public getBlendValidationMessage(): string | null {
+    if (!this.data.is_blend || !this.data.blend_beans || this.data.blend_beans.length === 0) {
+      return null;
+    }
+
+    const totalGrams = this.data.blend_beans.reduce((sum, bean) => sum + (bean.grams || 0), 0);
+    const totalPercentage = this.data.blend_beans.reduce((sum, bean) => sum + (bean.percentage || 0), 0);
+    const beanWeightIn = this.data.bean_weight_in || 0;
+
+    const errors: string[] = [];
+
+    // Check if any bean is not selected
+    const unselectedBeans = this.data.blend_beans.filter((bean) => !bean.bean_id);
+    if (unselectedBeans.length > 0) {
+      errors.push('⚠️ Please select all beans in the blend');
+    }
+
+    // Check if total grams match bean_weight_in
+    if (beanWeightIn > 0 && totalGrams > 0) {
+      const difference = Math.abs(beanWeightIn - totalGrams);
+      if (difference > 0.5) {
+        // Allow small rounding differences
+        errors.push(`⚠️ Blend total (${totalGrams}g) does not match input weight (${beanWeightIn}g)`);
+      }
+    }
+
+    // Check if percentages total to 100%
+    const percentageDifference = Math.abs(totalPercentage - 100);
+    if (percentageDifference > 0.5 && totalGrams > 0) {
+      // Allow small rounding differences
+      errors.push(`⚠️ Percentages total ${Math.round(totalPercentage)}% (should be 100%)`);
+    }
+
+    return errors.length > 0 ? errors.join(' | ') : null;
+  }
+
   protected readonly BREW_FUNCTION_PIPE_ENUM = BREW_FUNCTION_PIPE_ENUM;
 }

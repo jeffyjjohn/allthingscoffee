@@ -2,6 +2,7 @@
 import { IBean } from '../../interfaces/bean/iBean';
 import { IBrew } from '../../interfaces/brew/iBrew';
 import { IPreparation } from '../../interfaces/preparation/iPreparation';
+import { IBlendBean } from '../../interfaces/brew/iBlendBean';
 /** Classes */
 /** Third party */
 import moment from 'moment';
@@ -33,6 +34,7 @@ import { IReferenceGraph } from '../../interfaces/brew/iReferenceGraph';
 import { ReferenceGraph } from './referenceGraph';
 import { REFERENCE_GRAPH_TYPE } from '../../enums/brews/referenceGraphType';
 import { BREW_GRAPH_TYPE } from '../../enums/brews/brewGraphType';
+import { BlendBean } from './blendBean';
 export class BrewInstanceHelper {
   constructor() {}
 
@@ -61,6 +63,8 @@ export class Brew implements IBrew {
   public pressure_profile: string;
   // UUID
   public bean: string;
+  public is_blend: boolean;
+  public blend_beans: Array<IBlendBean>;
   public brew_temperature: number;
   public brew_temperature_time: number;
 
@@ -121,6 +125,8 @@ export class Brew implements IBrew {
     this.mill_timer = 0;
     this.pressure_profile = '';
     this.bean = '';
+    this.is_blend = false;
+    this.blend_beans = [];
     this.brew_temperature_time = 0;
     this.brew_temperature = 0;
     this.brew_time = 0;

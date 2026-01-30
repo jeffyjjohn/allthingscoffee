@@ -15,6 +15,8 @@ import { ConnectedPreparationDevice } from '../preparationDevice/connectedPrepar
 import { PreparationDeviceType } from '../preparationDevice';
 import { PreparationDevice } from '../preparationDevice/preparationDevice';
 import { UIPreparationHelper } from '../../services/uiPreparationHelper';
+import { PuckSize } from './puckSize';
+import { IPuckSize } from '../../interfaces/preparation/iPuckSize';
 
 export class Preparation implements IPreparation {
   public name: string;
@@ -32,6 +34,7 @@ export class Preparation implements IPreparation {
   public tools: Array<PreparationTool>;
   public attachments: Array<string>;
   public connectedPreparationDevice: ConnectedPreparationDevice;
+  public puck_sizes: Array<IPuckSize>;
 
   constructor() {
     this.name = '';
@@ -54,6 +57,7 @@ export class Preparation implements IPreparation {
     this.brew_order = new OrderBrewParameter();
     this.tools = [];
     this.attachments = [];
+    this.puck_sizes = [];
 
     this.connectedPreparationDevice = new ConnectedPreparationDevice();
   }

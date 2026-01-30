@@ -7,6 +7,7 @@ import { IBrewParameter } from '../parameter/iBrewParameter';
 import { IOrderBrewParameter } from '../parameter/iOrderBrewParameter';
 import { PreparationTool } from '../../classes/preparation/preparationTool';
 import { IConnectedPreparationDevice } from '../preparationDevices/iConnectedPreparationDevice';
+import { IPuckSize } from './iPuckSize';
 
 export interface IPreparation {
   name: string;
@@ -23,4 +24,5 @@ export interface IPreparation {
   use_custom_parameters: boolean;
   attachments: Array<string>;
   connectedPreparationDevice: IConnectedPreparationDevice;
+  puck_sizes: Array<IPuckSize>;
 }

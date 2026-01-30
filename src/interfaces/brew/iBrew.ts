@@ -10,6 +10,7 @@ import { BrewFlow } from '../../classes/brew/brewFlow';
 import { IPreparationDeviceBrew } from './iPreparationDeviceBrew';
 import { ICustomInformationBrew } from './ICustomInformationBrew';
 import { IReferenceGraph } from './iReferenceGraph';
+import { IBlendBean } from './iBlendBean';
 
 export interface IBrew {
   // Properties
@@ -163,6 +164,16 @@ export interface IBrew {
   preparationDeviceBrew: IPreparationDeviceBrew;
 
   customInformation: ICustomInformationBrew;
+
+  /**
+   * Flag to indicate if this brew uses a blend
+   */
+  is_blend: boolean;
+
+  /**
+   * Array of blend beans (only used when is_blend is true)
+   */
+  blend_beans: Array<IBlendBean>;
 
   // Functions
   formateDate(): string;

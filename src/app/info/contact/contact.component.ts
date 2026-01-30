@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
       LINK_TRACKING.ACTIONS.GITHUB,
     );
     this.uiHelper.openExternalWebpage(
-      'https://github.com/graphefruit/Beanconqueror',
+      'https://github.com/jeffyjjohn/CoffeeThings',
     );
   }
   public openWebsite() {
@@ -31,6 +31,6 @@ export class ContactComponent implements OnInit {
       LINK_TRACKING.TITLE,
       LINK_TRACKING.ACTIONS.WEBSITE,
     );
-    this.uiHelper.openExternalWebpage('https://beanconqueror.com');
+    this.uiHelper.openExternalWebpage('https://everythingcoffee.io');
   }
 }

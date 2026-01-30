@@ -65,16 +65,81 @@
           </ion-select>
         </ion-item>
       }
+      <!-- Single Origin vs Blend Selector -->
+      <ion-item lines="inset">
+        <ion-label>{{"BREW_DATA_BEAN_ORIGIN_TYPE" | translate}}</ion-label>
+        <ion-segment [(ngModel)]="data.is_blend" (ionChange)="onBeanOriginTypeChanged()">
+          <ion-segment-button value="false">
+            <ion-label>{{"BREW_DATA_SINGLE_ORIGIN" | translate}}</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="true">
+            <ion-label>{{"BREW_DATA_BLEND" | translate}}</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-item>
       @if((settings | brewFieldVisiblePipe: [settings.manage_parameters.bean_type,
         choosenPreparation.manage_parameters.bean_type,
         choosenPreparation.use_custom_parameters])) {
-        <ion-item [style.order]="(settings | brewFieldOrderPipe: [settings.brew_order.before.bean_type,
-          choosenPreparation.brew_order.before.bean_type,
-          choosenPreparation.use_custom_parameters])" lines="inset">
-          <ion-select label-placement="stacked" label='{{"BREW_DATA_BEAN_TYPE" | translate}}' [(ngModel)]="data.bean" bean-overlay [show-finished]="false"
-                      placeholder="{{'BREW.PLACE_HOLDER.BREW_DATA_BEAN_TYPE' | translate}}">
-          </ion-select>
-        </ion-item>
+        @if(!data.is_blend) {
+          <!-- Single Origin Bean Selection -->
+          <ion-item [style.order]="(settings | brewFieldOrderPipe: [settings.brew_order.before.bean_type,
+            choosenPreparation.brew_order.before.bean_type,
+            choosenPreparation.use_custom_parameters])" lines="inset">
+            <ion-select label-placement="stacked" label='{{"BREW_DATA_BEAN_TYPE" | translate}}' [(ngModel)]="data.bean" bean-overlay [show-finished]="false"
+                        placeholder="{{'BREW.PLACE_HOLDER.BREW_DATA_BEAN_TYPE' | translate}}">
+            </ion-select>
+          </ion-item>
+        } @else {
+          <!-- Blend Management -->
+          <div style="width: 100%; padding: 10px 0;">
+            <ion-item lines="none">
+              <ion-label class="ion-text-wrap" style="font-size: 14px; font-weight: 500;">{{"BREW_DATA_BLEND_MANAGEMENT" | translate}}</ion-label>
+            </ion-item>
+            @for(blendBean of data.blend_beans; track $index; let last = $last) {
+              <ion-card style="margin: 8px 0; padding: 10px;">
+                <ion-item lines="inset">
+                  <ion-select label-placement="stacked" label='{{"BREW_DATA_BEAN_TYPE" | translate}}' 
+                              [(ngModel)]="blendBean.bean_id" bean-overlay [show-finished]="false"
+                              placeholder="{{'BREW.PLACE_HOLDER.BREW_DATA_BEAN_TYPE' | translate}}"
+                              (ionChange)="onBlendBeanChanged($index)">
+                  </ion-select>
+                </ion-item>
+                <ion-item lines="inset">
+                  <ion-input label-placement="stacked" label='{{"BREW_DATA_BLEND_GRAMS" | translate}}' 
+                             [(ngModel)]="blendBean.grams" 
+                             (ionChange)="onBlendBeanChanged($index)"
+                             inputmode="decimal"
+                             placeholder="{{'BREW_DATA_BLEND_GRAMS' | translate}}"
+                             prevent-characters remove-empty-number
+                             type="text"></ion-input>
+                </ion-item>
+                <ion-item lines="inset">
+                  <ion-input label-placement="stacked" label='{{"BREW_DATA_BLEND_PERCENTAGE" | translate}}'
+                             [(ngModel)]="blendBean.percentage"
+                             (ionChange)="onBlendBeanChanged($index)"
+                             inputmode="decimal"
+                             placeholder="{{'BREW_DATA_BLEND_PERCENTAGE' | translate}}"
+                             prevent-characters remove-empty-number
+                             type="text"></ion-input>
+                </ion-item>
+                <ion-button (click)="removeBlendBean($index)" color="danger" expand="block" fill="outline">
+                  {{"REMOVE" | translate}}
+                </ion-button>
+              </ion-card>
+            }
+            <ion-button (click)="addBlendBean()" color="accent" expand="block">
+              {{"ADD_BEAN_TO_BLEND" | translate}}
+            </ion-button>
+            <!-- Validation Messages -->
+            @if(getBlendValidationMessage() as validationMsg) {
+              <ion-item lines="none">
+                <ion-label color="warning" class="ion-text-wrap" style="font-size: 12px;">
+                  {{validationMsg}}
+                </ion-label>
+              </ion-item>
+            }
+          </div>
+        }
       }
       @if((settings | brewFieldVisiblePipe: [settings.manage_parameters.mill,
         choosenPreparation.manage_parameters.mill,

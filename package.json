@@ -1,8 +1,8 @@
 {
-  "name": "beanconqueror",
+  "name": "everythingcoffee",
   "version": "2.0.0",
-  "author": "Lars Saalbach",
-  "homepage": "https://github.com/graphefruit/beanconqueror",
+  "author": "Jeffy John",
+  "homepage": "https://github.com/jeffyjjohn/CoffeeThings",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

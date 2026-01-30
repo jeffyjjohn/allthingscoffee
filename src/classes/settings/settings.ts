@@ -34,6 +34,7 @@ import { BREW_SORT_ORDER } from '../../enums/brews/brewSortOrder';
 import { BREW_SORT_AFTER } from '../../enums/brews/brewSortAfter';
 import { BREW_DISPLAY_IMAGE_TYPE } from '../../enums/brews/brewDisplayImageType';
 import { THEME_MODE_ENUM } from '../../enums/settings/themeMode';
+import { Household } from '../household/household';
 
 export class Settings implements ISettings {
   public theme_mode: THEME_MODE_ENUM;
@@ -247,6 +248,10 @@ export class Settings implements ISettings {
   public visualizer_username: string;
   public visualizer_password: string;
   public visualizer_upload_automatic: boolean;
+
+  public household: Household;
+  public household_enabled: boolean;
+  public current_user_id: string;
 
   public show_backup_issues: boolean;
 
@@ -584,6 +589,10 @@ export class Settings implements ISettings {
     this.visualizer_username = '';
     this.visualizer_password = '';
     this.visualizer_upload_automatic = false;
+
+    this.household = new Household();
+    this.household_enabled = false;
+    this.current_user_id = '';
 
     this.show_backup_issues = true;
 

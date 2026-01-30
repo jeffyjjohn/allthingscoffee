@@ -3,6 +3,7 @@ import { BEAN_MIX_ENUM } from '../../enums/beans/mix';
 /** Enums */
 import { ROASTS_ENUM } from '../../enums/beans/roasts';
 import { IBean } from '../../interfaces/bean/iBean';
+import { IBeanConsumption } from '../../interfaces/bean/iBeanConsumption';
 /** Classes */
 import { Config } from '../objectConfig/objectConfig';
 import moment from 'moment';
@@ -76,6 +77,11 @@ export class Bean implements IBean {
 
   public co2e_kg: number;
 
+  /**
+   * Tracks consumption by user in household (only used when household feature is enabled)
+   */
+  public household_consumption: Array<IBeanConsumption>;
+
   constructor() {
     this.name = '';
     this.buyDate = '';
@@ -138,6 +144,7 @@ export class Bean implements IBean {
     this.openDate = '';
 
     this.co2e_kg = 0;
+    this.household_consumption = [];
   }
 
   public getRoastName(): string {

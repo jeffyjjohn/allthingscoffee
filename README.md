@@ -1,21 +1,20 @@
-[![license](https://img.shields.io/badge/license-GPL%203.0-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html) [![Github All Releases](https://img.shields.io/github/downloads/graphefruit/beanconqueror/total.svg)](https://github.com/graphefruit/beanconqueror/releases) [![GitHub Release Date](https://img.shields.io/github/release-date/graphefruit/beanconqueror.svg)](https://github.com/graphefruit/beanconqueror/releases)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=graphefruit_Beanconqueror&metric=alert_status)](https://sonarcloud.io/dashboard?id=graphefruit_Beanconqueror)
+[![license](https://img.shields.io/badge/license-GPL%203.0-brightgreen.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-# Beanconqueror
+# Everything Coffee
 
-Beanconqueror - The Ultimate Coffee Companion
+Everything Coffee - Barista-ing isn't that tough
 
 You’re a coffee afficiando, and so am I!
-Beanconqueror is the product of our shared love of the drink in our cups and in our hearts.
-Whether you're just starting out, or are an experienced barista, Beanconqueror will help you get the most out of your coffee.
+Everything Coffee is designed to help baristas at all levels perfect their craft.
+Whether you're just starting out, or are an experienced barista, Everything Coffee will help you get the most out of your coffee.
 
 Optimize your brews:
-Beanconqueror offers a wide range of preparation methods, including V60, Aeropress, Espresso, Orea v3, Mokkamaster and more.
+Everything Coffee offers a wide range of preparation methods, including V60, Aeropress, Espresso, Orea v3, Mokkamaster and more.
 Each comes setup ready to go, or you can customize your preparation methods with just the parameters you want to use.
 This way, you can get your perfect brew every time.
 
 Keep track of your beans:
-Beanconqueror makes it easy to keep track of all your beans.
+Everything Coffee makes it easy to keep track of all your beans.
 You can easily scan or import detailed information of roasted coffee from your favourite roasters, or even from your own roasting setup.
 It’ll even keep track of your running total of beans so you know when you’re running low.
 
@@ -27,49 +26,28 @@ Beanconqueror also has a dedicated water section where you can add your custom w
 Save all the key information for your water recipes, such as general hardness, sodium, calcium, magnesium, and more.
 
 Flexibility and Convenience:
-Beanconqueror is available for both iOS and Android, so you can take it with you wherever you go.
-It also supports several languages, including English, German, Spanish, Chinese, and Turkish, and more will be added in the future. Beanconqueror is also Open Source and free to use.
+Everything Coffee is available for both iOS and Android, so you can take it with you wherever you go.
+It also supports several languages, including English, German, Spanish, Chinese, and Turkish, and more will be added in the future. Everything Coffee is also Open Source and free to use.
 
 Flow & Pressure Profiling:
-Beanconqueror is compatible with a range of bluetooth scales and pressure profile devices, including Decent Scale, Acaia Scales, Felicita Scales, Hiroia Jimmy, Eureka Precisa, Skale2, Smart Espresso Profiler, and Pressensor.
+Everything Coffee is compatible with a range of bluetooth scales and pressure profile devices, including Decent Scale, Acaia Scales, Felicita Scales, Hiroia Jimmy, Eureka Precisa, Skale2, Smart Espresso Profiler, and Pressensor.
 It can even produce graphs to track your brew live and help you repeat your favourite brews more easily.
 
 Track your caffeine consume into Apple Health and have a look there.
 
-Whether you're looking to track your coffee journey, optimise your brews, or simply keep track of your coffee beans, Beanconqueror has everything you need to perfect your brew from green to cup.
+Whether you're looking to track your coffee journey, optimise your brews, or simply keep track of your coffee beans, Everything Coffee has everything you need to perfect your brew from green to cup.
 
-##### Follow me
+##### Acknowledgements
 
-| [Website](https://beanconqueror.com/) | [Instagram](https://www.instagram.com/beanconqueror/) | [Facebook](https://www.facebook.com/Beanconqueror/) |
+If it weren't for [BeanConqueror.com](https://beanconqueror.com/) none of this would have been possible.
 
 ## Sneak preview
 
-![Beanconqueror gif](demo/Beanconqueror.gif)
+![Everything Coffee gif](demo/Beanconqueror.gif)
 
 ## Articles
 
 - German: [iphone-ticker](https://www.iphone-ticker.de/beanconqueror-app-geheimtipp-fuer-espresso-verrueckte-168517/) [wuv](https://www.wuv.de/tech/techtaeglich_super_mario_rast_durch_berlin)
-
-## Threads
-
-- German: [Kaffee-Netz](https://www.kaffee-netz.de/threads/beanconqueror-app.111249)
-- English: [Home-Barista](https://www.home-barista.com/knockbox/beanconqueror-app-t68236.html)
-- Dutch [tweakers](https://gathering.tweakers.net/forum/list_messages/1635607/44) [koffiepraat](https://www.koffiepraat.nl/forum/viewtopic.php?t=9842)
-- Greek: [greekespresso](https://www.greekespresso.gr/forum/viewtopic.php?f=4&t=7251&p=97854&hilit=beanconqueror#p97854)
-- Turkish: [kahvekulubu](https://www.kahvekulubu.net/sosyal/threads/kahve-loglama-kayit-oneri-yontem-metodoloji.3483/)
-
-## Rankings
-
-On January 2021, the app got a bit hyped, through german featuring articles, the top rankings because of this you find below.
-
-### Android
-
-Top charts: Eat & Drink - Rank 5
-Eat & Drink Ranking - Rank 70
-
-### iOS
-
-Eat & Drink Raking - Rank 36
 
 ## Features
 
@@ -116,7 +94,7 @@ The App is a cross platform application, running on the ionic framework.
 
 Download the latest version [here](https://play.google.com/store/apps/details?id=com.beanconqueror.app).
 
-If you don't want to download the app by playstore, just have a look on the [release page](https://github.com/graphefruit/Beanconqueror/releases).
+If you don't want to download the app by playstore, just have a look on the [release page](https://github.com/jeffyjjohn/CoffeeThings/releases).
 
 ### iOS
 
@@ -136,15 +114,9 @@ Thanks! :heart:
 
 ## Contribution
 
-Before continuing it is important to note that Beanconqueror is open source available.
+Before continuing it is important to note that Everything Coffee is open source available.
 
-I welcome pull requests, but you will be required to sign the Beanconqueror CLA before any contributions can be merged.
-
-## Statistics
-
-![Graphefruit github stats](https://github-readme-stats.vercel.app/api?username=graphefruit&theme=dark&repo=Beanconqueror)
-
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=graphefruit&theme=dark)
+I welcome pull requests, but you will be required to sign the Everything Coffee CLA before any contributions can be merged.
 
 ## Third Party Apps
 
